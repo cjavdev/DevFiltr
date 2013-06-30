@@ -1,20 +1,13 @@
 DevFiltr::Application.routes.draw do
-  get "assessment_attempts/index"
-
-  get "assessment_attempts/show"
-
-  get "assessment_attempts/new"
-
-  get "assessment_attempts/edit"
-
-  get "assessments/index"
-
-  get "assessments/show"
-
-  get "assessments/new"
-
-  get "assessments/edit"
-
+  resources :assessments do
+    member do
+      resources :assessment_attempts, only: [:new, :create]
+    end
+  end
+  
+  resources :assessment_attempts, except: [:new, :create]
+  
   resource :session
   resources :users
 end
+

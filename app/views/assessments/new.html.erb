@@ -1,2 +1,13 @@
-<h1>Assessments#new</h1>
-<p>Find me in app/views/assessments/new.html.erb</p>
+<form action="/assessments" method="post" accept-charset="utf-8">
+	<label for="title">title</label>
+	<input type="text" name="title" value="" id="title">
+	<br />
+	<label for="time_limit">time_limit</label>
+	<input type="text" name="time_limit" value="" id="time_limit">
+	<br />
+	<label for="specs">specs</label>
+	<input type="text" name="specs" value="" id="specs">
+	<br />
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" id="authenticity_token">
+	<p><input type="submit" value="Submit Assessment"></p>
+</form>
