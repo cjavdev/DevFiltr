@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  candidate_id: 1
+  started_at: 2013-06-29 21:52:24
+  finished_at: 2013-06-29 21:52:24
+  title: MyString
+  solution: MyText
+
+two:
+  candidate_id: 1
+  started_at: 2013-06-29 21:52:24
+  finished_at: 2013-06-29 21:52:24
+  title: MyString
+  solution: MyText
