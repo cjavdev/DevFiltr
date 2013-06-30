@@ -1,13 +1,38 @@
+<% if flash[:errors] %>
+<ul>
+	<% flash[:errors].each do |error| %>
+	<li><%= error %></li>
+	<% end %>
+</ul>
+<% end %>
 <form action="/assessments" method="post" accept-charset="utf-8">
-	<label for="title">title</label>
-	<input type="text" name="title" value="" id="title">
+	<label for="title">Title</label>
+	<input type="text" name="assessment[title]" value="" id="title">
 	<br />
-	<label for="time_limit">time_limit</label>
-	<input type="text" name="time_limit" value="" id="time_limit">
+	
+	<label for="time_limit">Time Limit</label>
+	<input type="text" name="assessment[time_limit]" value="" id="time_limit" placeholder="mins">
 	<br />
-	<label for="specs">specs</label>
-	<input type="text" name="specs" value="" id="specs">
+	
+	<label for="instructions">Instructions</label>
+	<textarea name="assessment[instructions]" id="instructions" rows="10" cols="60">
+	</textarea>
 	<br />
+	
+	<label for="specs">Specs</label>
+	<textarea name="assessment[specs]" id="specs" rows="10" cols="60">
+	</textarea>
+	<br />
+	
+	<label for="language">Language</label>
+	<select name="assessment[language]" id="language">
+		<option>ruby</option>
+	</select>
+	<br />
+	
+	<label for="difficulty">Difficulty</label>
+	<input type="text" name="assessment[difficulty]" value="" id="difficulty" placeholder="1 (easy) - 5 (hard)">
+	
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" id="authenticity_token">
 	<p><input type="submit" value="Submit Assessment"></p>
 </form>
