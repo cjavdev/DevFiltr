@@ -1,2 +1,39 @@
-<h1>Assessments#edit</h1>
-<p>Find me in app/views/assessments/edit.html.erb</p>
+<% if flash[:errors] %>
+<ul>
+	<% flash[:errors].each do |error| %>
+	<li><%= error %></li>
+	<% end %>
+</ul>
+<% end %>
+<form action="<%= assessment_url(@assessment) %>" method="post" accept-charset="utf-8">
+	<label for="title">Title</label>
+	<input type="text" name="assessment[title]" value="<%= @assessment.title %>" id="title">
+	<br />
+	
+	<label for="time_limit">Time Limit</label>
+	<input type="text" name="assessment[time_limit]" value="<%= @assessment.time_limit %>" id="time_limit" placeholder="mins">
+	<br />
+	
+	<label for="instructions">Instructions</label>
+	<textarea name="assessment[instructions]" id="instructions" rows="10" cols="60"><%= @assessment.instructions %>
+	</textarea>
+	<br />
+	
+	<label for="specs">Specs</label>
+	<textarea name="assessment[specs]" id="specs" rows="10" cols="60"><%= @assessment.specs %>
+	</textarea>
+	<br />
+	
+	<label for="language">Language</label>
+	<select name="assessment[language]" id="language">
+		<option>ruby</option>
+	</select>
+	<br />
+	
+	<label for="difficulty">Difficulty</label>
+	<input type="text" name="assessment[difficulty]" value="" id="difficulty" placeholder="1 (easy) - 5 (hard)">
+	
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" id="authenticity_token">
+	<input type="hidden" name="_method" value="put" id="_method">
+	<p><input type="submit" value="Submit Assessment"></p>
+</form>

@@ -17,3 +17,5 @@ end
 gem 'bcrypt-ruby'
 gem 'jquery-rails'
 gem 'backbone-on-rails'
+gem 'rspec'
+gem 'grader'

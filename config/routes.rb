@@ -1,4 +1,5 @@
 DevFiltr::Application.routes.draw do
+  root :to => "root#root" 
   resources :assessments do
     member do
       resources :assessment_attempts, only: [:new, :create]

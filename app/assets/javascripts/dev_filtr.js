@@ -4,7 +4,10 @@ window.DevFiltr = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    new DevFiltr.Routers.Assessments({
+    	'$rootEl' : $("body")
+    });
+		Backbone.history.start();
   }
 };
 

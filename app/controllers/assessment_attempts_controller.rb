@@ -8,7 +8,8 @@ class AssessmentAttemptsController < ApplicationController
   end
 
   def new
-    @assessment_attempt = AssessmentAttempt.new
+    @assessment = Assessment.find(params[:id])
+    @assessment_attempt = @assessment.assessment_attempts.build
   end
   
   def create

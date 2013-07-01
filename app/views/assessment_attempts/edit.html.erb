@@ -1,2 +1,13 @@
-<h1>AssessmentAttempts#edit</h1>
-<p>Find me in app/views/assessment_attempts/edit.html.erb</p>
+<form action="<%= assessment_attempt_url(@assessment_attempt) %>" method="post">
+	<label for="title">title</label>
+	<input type="text" name="assessment_attempt[title]" value="<%= @assessment_attempt.title %>" id="title" />
+	<br />
+	<label for="solution">solution</label>
+	<textarea name="assessment_attempt[solution]" id="solution"><%= @assessment_attempt.solution %></textarea>
+	<br />
+	
+	
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" id="authenticity_token">
+	<input type="hidden" name="_method" value="put">
+	<p><input type="submit" value="Edit Attempt"></p>
+</form>

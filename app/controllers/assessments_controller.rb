@@ -1,10 +1,12 @@
 class AssessmentsController < ApplicationController
   def index
     @assessments = Assessment.all
+    render :json => @assessments
   end
 
   def show
     @assessment = Assessment.find(params[:id])
+    render :json => @assessment
   end
 
   def new

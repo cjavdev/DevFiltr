@@ -1,0 +1,8 @@
+<h1>Assessments</h1>
+<ul>
+<% assessments.each(function(assessment) { %>
+	<li>
+		<a href="#assessments/<%= assessment.escape("id") %>"><%= assessment.escape("title") %></a>
+	</li>
+<% }); %>
+</ul>
