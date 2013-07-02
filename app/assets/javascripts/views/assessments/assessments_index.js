@@ -5,8 +5,7 @@ DevFiltr.Views.AssessmentsIndex = Backbone.View.extend({
 	
   template: JST['assessments/index'],
 	
-	render: function () {
-		
+	render: function () {		
 		var renderedContent = this.template({
 			assessments: this.collection
 		});
@@ -14,5 +13,4 @@ DevFiltr.Views.AssessmentsIndex = Backbone.View.extend({
 		this.$el.html(renderedContent);
 		return this;
 	},
-
 });

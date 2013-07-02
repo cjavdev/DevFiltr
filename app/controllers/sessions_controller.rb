@@ -3,9 +3,9 @@ class SessionsController < ApplicationController
     @user = User.find_by_username(params[:username])
     if @user.validate_password(params[:password])
       session[:token] = @user.reset_token
-      redirect_to user_url(@user)
+      render :json => @user
     else
-      render :new
+      render :json => @user.errors.full_messages, :status => 422
     end
   end
   

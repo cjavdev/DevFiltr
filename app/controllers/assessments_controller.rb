@@ -1,4 +1,6 @@
 class AssessmentsController < ApplicationController
+  before_filter :require_login
+  
   def index
     @assessments = Assessment.all
     render :json => @assessments
@@ -14,12 +16,11 @@ class AssessmentsController < ApplicationController
   end
   
   def create
-    @assessment = Assessment.new(params[:assessment])
+    @assessment = current_user.assessments.new(params[:assessment])
     if @assessment.save
-      redirect_to assessment_url(@assessment)
+      render :json => @assessment
     else
-      flash[:errors] = @assessment.errors.full_messages
-      render :new
+      render :json => @assessment.errors.full_messages, :status => 422
     end
   end
 
@@ -31,10 +32,9 @@ class AssessmentsController < ApplicationController
     @assessment = Assessment.find(params[:id])
     @assessment.update_attributes(params[:assessment])
     if @assessment.save
-      redirect_to assessment_url(@assessment)
+      render :json => @assessment
     else
-      flash[:errors] = @assessment.errors.full_messages
-      render :edit
+      render :json =>  @assessment.errors.full_messages, :status => 422
     end
   end
 end

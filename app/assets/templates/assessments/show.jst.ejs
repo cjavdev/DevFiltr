@@ -1,5 +1,10 @@
 <h1><%= assessment.escape("title") %></h1>
-<%= assessment.escape("language") %> 
-<%= assessment.escape("difficulty") %>
-<%= assessment.escape("instructions") %>
+Language: <%= assessment.escape("language") %> <br />
+Difficulty (1-5): <%= assessment.escape("difficulty") %> <br />
+Instructions: <%= assessment.escape("instructions") %>
+<pre>
 <%= assessment.escape("specs") %>
+</pre>
+<br />
+<a href="#">Assessments</a>
+<a href="#<%= assessment.url() + '/take' %>">Take Assessment</a>

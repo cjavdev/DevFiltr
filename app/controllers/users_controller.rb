@@ -3,10 +3,12 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    render :json => @users
   end
 
   def show
     @user = User.find(params[:id])
+    render :json => @user
   end
 
   def new
@@ -16,10 +18,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to user_url(@user)
+      render :json => @user
     else
-      flash[:errors] = @user.errors.full_messages
-      render :new
+      render :json => @user.errors.full_messages, :status => 422
     end
   end
 end
