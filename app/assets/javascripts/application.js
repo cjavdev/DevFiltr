@@ -15,6 +15,7 @@
 //= require jquery.serializeJSON
 //= require underscore
 //= require backbone
+//= require backbone.sync
 //= require bootstrap
 //= require dev_filtr
 //= require_tree ../templates
