@@ -36,13 +36,20 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 	},
 	
 	take: function (id) {
-		var assessment_attempt = new DevFiltr.Models.AssessmentAttempt();
+		var that = this;
+		this._getAssessment(id, function(assessment) {
+			var assessment_attempt = new DevFiltr.Models.AssessmentAttempt();
+			assessment_attempt.set({"solution" : "my test solution"});
+						
+			assessment.get("assessment_attempts").add(assessment_attempt);
+			
+			var formView = new DevFiltr.Views.AssessmentAttemptForm({
+				model: assessment_attempt
+			});
 		
-		var formView = new DevFiltr.Views.AssessmentAttemptForm({
-			model: assessment_attempt
+			that._swapView(formView);
 		});
 		
-		this._swapView(formView);
 	},
 	
 	new_assessment: function (id) {

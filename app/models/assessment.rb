@@ -1,5 +1,5 @@
 class Assessment < ActiveRecord::Base
-  attr_accessible :administrator_id, :difficulty, :instructions, :language, :specs, :time_limit, :title
+  attr_accessible :administrator_id, :difficulty, :instructions, :language, :specs, :time_limit, :title, :skeleton
   
   validates :administrator_id, presence: true
 
@@ -15,4 +15,8 @@ class Assessment < ActiveRecord::Base
   
   has_many :assessment_attempts
   belongs_to :administrator, class_name: "User", foreign_key: :administrator_id
+  
+  def as_json(options = {})
+    super(options.merge({ :include => :assessment_attempts }))
+  end
 end
