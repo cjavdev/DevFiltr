@@ -5,12 +5,8 @@ window.DevFiltr = {
   Routers: {},
   initialize: function() {
     new DevFiltr.Routers.Assessments({
-    	'$rootEl' : $("body")
+    	'$rootEl' : $("#content")
     });
 		Backbone.history.start();
   }
 };
-
-$(document).ready(function(){
-  DevFiltr.initialize();
-});

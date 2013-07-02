@@ -1,4 +1,6 @@
 DevFiltr::Application.routes.draw do
+  devise_for :users
+
   root :to => "root#root" 
   resources :assessments do
     member do
@@ -8,7 +10,5 @@ DevFiltr::Application.routes.draw do
   
   resources :assessment_attempts, except: [:new, :create]
   
-  resource :session
-  resources :users
 end
 
