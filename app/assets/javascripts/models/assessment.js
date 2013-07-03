@@ -11,7 +11,11 @@ DevFiltr.Models.Assessment = Backbone.Model.extend({
 	
 	toJSON: function() {
 		var json = Backbone.Model.prototype.toJSON.call(this);
-		json.assessment.assessment_attempts_attributes = this.assessment_attempts.toJSON();
+		
+		if(this.assessment_attempts) {
+			json.assessment.assessment_attempts_attributes = this.assessment_attempts.toJSON();
+		}
+		
 		return json;
 	}
 });

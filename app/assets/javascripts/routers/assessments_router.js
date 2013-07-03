@@ -9,10 +9,9 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 	routes: {
 		"": "index",
 		"session/new" : "login",
-		"assessments/:id/take" : "take",
-		"assessments/new" : "new_assessment",
+		"assessments/new" : "new",
 		"assessments/:id" : "show",
-		"assessments" : "index"
+		"assessments" : "index",
 	},
 	
 	index: function () {
@@ -25,7 +24,6 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 	
 	show: function (id) {
 		var that = this;
-		console.log("showing");
 		this._getAssessment(id, function(assessment) {
 			var showView = new DevFiltr.Views.AssessmentShow({
 				model: assessment
@@ -35,24 +33,7 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 		});
 	},
 	
-	take: function (id) {
-		var that = this;
-		this._getAssessment(id, function(assessment) {
-			var assessment_attempt = new DevFiltr.Models.AssessmentAttempt();
-			assessment_attempt.set({"solution" : "my test solution"});
-						
-			assessment.get("assessment_attempts").add(assessment_attempt);
-			
-			var formView = new DevFiltr.Views.AssessmentAttemptForm({
-				model: assessment_attempt
-			});
-		
-			that._swapView(formView);
-		});
-		
-	},
-	
-	new_assessment: function (id) {
+	new: function (id) {
 		var assessment = new DevFiltr.Models.Assessment();
 		
 		var formView = new DevFiltr.Views.AssessmentForm({
@@ -63,34 +44,8 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 	},
 	
 	login: function () {
-		console.log("logging in");
 		var loginView = new DevFiltr.Views.LoginView();
 		
 		this._swapView(loginView);
-	},
-	
-	_swapView: function (view) {
-		console.log("swapping views");
-		if(this._currentView) {
-			this._currentView.remove();
-		}
-		this._currentView = view;
-		this.$rootEl.html(view.render().$el);
-	},
-	
-	_getAssessment: function(id, callback) {
-		var assessment = DevFiltr.assessments.get(id);
-		
-		if(!assessment) {
-			assessment = new DevFiltr.Models.Assessment({ id: id });
-			DevFiltr.assessments.add(assessment);
-			assessment.fetch({success: function (model) {
-				callback(model);
-			}});
-		} else {
-			callback(assessment);
-		}
-		
-		return assessment;
 	}
 });

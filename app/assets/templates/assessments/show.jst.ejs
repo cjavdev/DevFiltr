@@ -2,9 +2,15 @@
 Language: <%= assessment.escape("language") %> <br />
 Difficulty (1-5): <%= assessment.escape("difficulty") %> <br />
 Instructions: <%= assessment.escape("instructions") %>
+<h2>Specs</h2>
 <pre>
 <%= assessment.escape("specs") %>
 </pre>
+<h2>Skeleton</h2>
+<pre>
+	<%= assessment.escape("skeleton") %>
+</pre>
+
 <br />
 <a href="#">Assessments</a>
 <a href="#<%= assessment.url() + '/take' %>" class="btn">Take Assessment</a>

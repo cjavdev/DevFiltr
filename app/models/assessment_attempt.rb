@@ -9,6 +9,8 @@ class AssessmentAttempt < ActiveRecord::Base
   belongs_to :candidate, class_name: "User", foreign_key: :candidate_id
   belongs_to :assessment, :inverse_of => :assessment_attempts
   
+  after_commit :report
+  
   def report
     specs = self.assessment.specs
     g = Grader.create(:ruby, specs, self.solution, :html).grade

@@ -4,15 +4,7 @@
 	<input type="text" name="assessment_attempt[title]" value="" id="title" />
 	<br />
 	<label for="solution">Solution</label>
-	<div id="solution_editor">
-		<%= assessment_attempt.get("solution") %>
-	</div>
-	<style type="text/css" media="screen">
-	    #solution_editor { 
-	        position: relative;
-	        height: 300px;
-	    }
-	</style>
+	<div id="solution_editor" class="editor"><%= assessment_attempt.get("solution") %></div>
 	<script type="text/javascript" charset="utf-8">
 	  var editor = ace.edit("solution_editor");
 	  editor.setTheme("ace/theme/monokai");
