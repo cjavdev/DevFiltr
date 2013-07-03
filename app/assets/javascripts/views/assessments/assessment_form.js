@@ -10,7 +10,6 @@ DevFiltr.Views.AssessmentForm = Backbone.View.extend({
   template: JST['assessments/form'],
 	
 	render: function () {
-		
 		var renderedContent = this.template({
 			assessment: this.model
 		});

@@ -1,8 +1,12 @@
 <h1><%= @assessment_attempt.title %></h1>
+
+
 <p>
 	<%= @assessment_attempt.solution %>
 </p>
 
+
 <a href="<%= edit_assessment_attempt_url(@assessment_attempt) %>">Edit</a>
+
 
 <%= @assessment_attempt.report.html_safe %>

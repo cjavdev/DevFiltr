@@ -1,6 +1,32 @@
 <h2><%= assessment_attempt.escape("title") %></h2>
-<pre>
-<%= assessment_attempt.get("solution") %>
-</pre>
+<a href="#assessments/<%= assessment_attempt.escape("assessment_id") %>/take" class="btn">Try Again</a>
+<hr />
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#report" data-toggle="tab">Report</a></li>
+	<li><a href="#solution" data-toggle="tab">Solution</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane" id="solution">
+		<pre><%= assessment_attempt.get("solution") %></pre>
+	</div>
+  <div class="tab-pane active" id="report">
+		<% if(assessment_attempt.get("report").first().get("is_error")) { %>
+			<div id="report_editor" class="editor"> <%= assessment_attempt.get("report").first().get("html_report") %></div>
+			<script type="text/javascript" charset="utf-8">
+			var report_editor = ace.edit("report_editor");
+			report_editor.setTheme("ace/theme/monokai");
+			report_editor.getSession().setMode("ace/mode/text");
+			</script>
+		<% } else { %>
+			<%= assessment_attempt.get("report").first().get("html_report") %>
+			<script type="text/javascript" charset="utf-8">
+			var report_editor = ace.edit("report_editor");
+			report_editor.setTheme("ace/theme/monokai");
+			report_editor.getSession().setMode("ace/mode/ruby");
+			</script>
+		<% } %>
+	</div>
+</div>
 
-<%= assessment_attempt.get("report") %>
+
+

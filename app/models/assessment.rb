@@ -19,6 +19,6 @@ class Assessment < ActiveRecord::Base
   accepts_nested_attributes_for :assessment_attempts
   
   def as_json(options = {})
-    super(options.merge({ :include => :assessment_attempts }))
+    super(options.merge({ :include => { :assessment_attempts => { :include => :report }}}))
   end
 end

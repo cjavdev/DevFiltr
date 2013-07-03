@@ -2,15 +2,61 @@
 Language: <%= assessment.escape("language") %> <br />
 Difficulty (1-5): <%= assessment.escape("difficulty") %> <br />
 Instructions: <%= assessment.escape("instructions") %>
-<h2>Specs</h2>
-<pre>
-<%= assessment.escape("specs") %>
-</pre>
-<h2>Skeleton</h2>
-<pre>
-	<%= assessment.escape("skeleton") %>
-</pre>
 
-<br />
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#specs" data-toggle="tab">Specs</a></li>
+	<li><a href="#skeleton" data-toggle="tab">Skeleton</a></li>
+	<li><a href="#attempts" data-toggle="tab">Attempts</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="specs">
+		<pre><%= assessment.escape("specs") %></pre>
+	</div>
+  <div class="tab-pane" id="skeleton">
+		<pre><%= assessment.escape("skeleton") %></pre>
+  </div>
+	<div class="tab-pane" id="attempts">
+		
+		<table class="table table-hover">
+			<thead>
+				<th>Title</th>
+				<th>Candidate</th>
+				<th>Examples</th>
+				<th>Failed</th>
+				<th>Pending</th>
+				<th>Score</th>
+			</thead>
+			<tbody>
+				<% assessment.get("assessment_attempts").each(function(attempt) { %>
+				<tr>
+					<td>
+						<a href="#assessment_attempts/<%= attempt.get("id") %>">
+							<%= attempt.get("title") %>
+						</a>
+					</td>
+					<td>
+						<%= attempt.get("candidate_id") %>
+					</td>
+					<td>
+						<% console.log(attempt) %>
+						<%= attempt %>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+				</tr>
+				<% })%>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
 <a href="#">Assessments</a>
-<a href="#<%= assessment.url() + '/take' %>" class="btn">Take Assessment</a>
+<a href="#<%= assessment.url() + '/take' %>" class="btn">Take</a>
+<a href="#<%= assessment.url() + '/edit' %>" class="btn">Edit</a>

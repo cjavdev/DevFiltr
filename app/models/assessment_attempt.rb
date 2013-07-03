@@ -1,7 +1,5 @@
 class AssessmentAttempt < ActiveRecord::Base
   attr_accessible :candidate_id, :finished_at, :solution, :started_at, :title, :assessment_id
-  attr_reader :report, :example_count, :pending_count, :failure_count
-  
   
   validates :title, presence: true
   validates :candidate_id, presence: true
@@ -15,7 +13,7 @@ class AssessmentAttempt < ActiveRecord::Base
     super(options.merge({ :include => :report }))
   end
   
-  after_commit :grade_attempt
+  after_commit :grade
   
   def graded?
     !!self.report
@@ -28,15 +26,15 @@ class AssessmentAttempt < ActiveRecord::Base
     h_report = Grader.create(:ruby, specs, self.solution, :html).grade
     j_report = Grader.create(:ruby, specs, self.solution, :json).grade
     
-    new_report = self.report = Report.new
+    self.report = Report.new
     
-    new_report.html_report = h_report.report
-    new_report.json_report = j_report.report
-    new_report.example_count = h_report.example_count
-    new_report.pending_count = h_report.pending_count
-    new_report.failure_count = h_report.failure_count
-    
-    if new_report.save
+    self.report.html_report = h_report.report
+    self.report.json_report = j_report.report
+    self.report.example_count = h_report.example_count
+    self.report.pending_count = h_report.pending_count
+    self.report.failure_count = h_report.failure_count
+    self.report.is_error = h_report.is_error
+    if self.report.save
       true
     else
       false

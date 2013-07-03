@@ -16,6 +16,7 @@
 //= require underscore
 //= require backbone
 //= require backbone.sync
+//= require rspec_report
 //= require bootstrap
 //= require dev_filtr
 //= require_tree ../templates
