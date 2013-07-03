@@ -5,16 +5,7 @@ DevFiltr.Models.Assessment = Backbone.Model.extend({
 		});
 		
 		attempts.set(data.assessment_attempts);
-		
-		if(!this.assessment_attempts) {
-			this.assessment_attempts = new DevFiltr.Collections.AssessmentAttempts({
-				assessment: this
-			});
-		}
-		
-		
-		delete data.assessment_attempts;
-		data.assessment_attempts = this.assessment_attempts;
+		data.assessment_attempts = attempts;
 		return data;
 	},
 	

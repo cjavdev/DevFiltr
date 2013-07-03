@@ -1,10 +1,12 @@
 class AssessmentAttemptsController < ApplicationController
   def index
     @assessment_attempts = AssessmentAttempt.all
+    render :json => @assessment_attempts
   end
 
   def show
     @assessment_attempt = AssessmentAttempt.find(params[:id])
+    render :json => @assessment_attempt
   end
 
   def new
@@ -13,12 +15,12 @@ class AssessmentAttemptsController < ApplicationController
   end
   
   def create
-    @assessment_attempt = AssessmentAttempt.new(params[:assessment_attempt])
+    
+    @assessment_attempt = current_user.assessment_attempts.new(params[:assessment_attempt])
     if @assessment_attempt.save
-      redirect_to assessment_attempt_url(@assessment_attempt)
+      render :json => @assessment_attempt
     else
-      flash[:errors] = @assessment_attempt.errors.full_messages
-      render :new
+      render :json => @assessment_attempt.errors.full_messages, :status => 422
     end
   end
 
@@ -30,10 +32,9 @@ class AssessmentAttemptsController < ApplicationController
     @assessment_attempt = AssessmentAttempt.find(params[:id])
     @assessment_attempt.update_attributes(params[:assessment_attempt])
     if @assessment_attempt.save
-      redirect_to assessment_attempt_url(@assessment_attempt)
+      render :json => @assessment_attempt
     else
-      flash[:errors] = @assessment_attempt.errors.full_messages
-      render :edit
+      render :json => @assessment_attempt.errors.full_messages, :status => 422
     end
   end
 end
