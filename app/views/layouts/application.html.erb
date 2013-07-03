@@ -7,18 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render :partial => "layouts/nav_bar" %>
-	<div class="container">
-		<% if notice %>
-		<p class="notice"><%= notice %></p>
-		<% end %>
-		<% if alert %>
-		<p class="alert"><%= alert %></p>
-		<% end %>
-		<div id="content" class="container">
-			<%= yield %>
-		</div>
+	<div id="wrap">
+		<%= render :partial => "layouts/nav_bar" %>
+	  <div id="main" class="container clear-top">
+			<%= render :partial => "layouts/notices" %>
+			<div id="content" class="container">
+				<%= yield %>
+			</div>
+	  </div>
 	</div>
-	<br />
+	<footer class="footer">
+		<div class="container">
+			<hr />
+			some footer stuff
+		</div>
+	</footer>
 </body>
 </html>
