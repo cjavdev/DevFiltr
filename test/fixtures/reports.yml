@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  html_report: MyText
+  json_report: MyText
+  example_count: 1
+  failure_count: 1
+  pending_count: 1
+  assessment_attempt_id: 1
+
+two:
+  html_report: MyText
+  json_report: MyText
+  example_count: 1
+  failure_count: 1
+  pending_count: 1
+  assessment_attempt_id: 1

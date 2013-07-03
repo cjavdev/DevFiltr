@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702222729) do
+ActiveRecord::Schema.define(:version => 20130703144604) do
 
   create_table "assessment_attempts", :force => true do |t|
     t.integer  "candidate_id"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(:version => 20130702222729) do
 
   add_index "models", ["email"], :name => "index_models_on_email", :unique => true
   add_index "models", ["reset_password_token"], :name => "index_models_on_reset_password_token", :unique => true
+
+  create_table "reports", :force => true do |t|
+    t.text     "html_report"
+    t.text     "json_report"
+    t.integer  "example_count"
+    t.integer  "failure_count"
+    t.integer  "pending_count"
+    t.integer  "assessment_attempt_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username"
