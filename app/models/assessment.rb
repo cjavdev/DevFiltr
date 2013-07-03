@@ -1,5 +1,5 @@
 class Assessment < ActiveRecord::Base
-  attr_accessible :administrator_id, :difficulty, :instructions, :language, :specs, :time_limit, :title, :skeleton
+  attr_accessible :administrator_id, :difficulty, :instructions, :language, :specs, :time_limit, :title, :skeleton, :assessment_attempts_attributes
   
   validates :administrator_id, presence: true
 
@@ -13,8 +13,10 @@ class Assessment < ActiveRecord::Base
   
   validates :instructions, :language, :specs, :title, presence: true
   
-  has_many :assessment_attempts
+  has_many :assessment_attempts, :inverse_of => :assessment
   belongs_to :administrator, class_name: "User", foreign_key: :administrator_id
+  
+  accepts_nested_attributes_for :assessment_attempts
   
   def as_json(options = {})
     super(options.merge({ :include => :assessment_attempts }))

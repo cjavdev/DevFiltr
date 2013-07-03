@@ -7,7 +7,7 @@ class AssessmentAttempt < ActiveRecord::Base
   validates :candidate_id, presence: true
   
   belongs_to :candidate, class_name: "User", foreign_key: :candidate_id
-  belongs_to :assessment
+  belongs_to :assessment, :inverse_of => :assessment_attempts
   
   def report
     specs = self.assessment.specs
