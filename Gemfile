@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'pg'
 
-gem "sass", :require => 'sass'
+# gem "sass", :require => 'sass'
 
 group :development do
   gem 'better_errors'
