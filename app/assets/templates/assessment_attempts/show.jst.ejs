@@ -1,5 +1,14 @@
-<h2><%= assessment_attempt.escape("title") %></h2>
-<a href="#assessments/<%= assessment_attempt.escape("assessment_id") %>/take" class="btn">Try Again</a>
+<h2>
+	<%= assessment_attempt.escape("title") %>
+</h2>
+
+<% if(assessment_attempt.get("candidate_id") === DevFiltr.current_user_id) { %>
+	<a href="#assessments/<%= assessment_attempt.escape("assessment_id") %>/take"
+		 class="btn">
+		 Try Again
+	</a>
+<% }%>
+
 <hr />
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#report" data-toggle="tab">Report</a></li>
@@ -11,7 +20,7 @@
 	</div>
   <div class="tab-pane active" id="report">
 		<% if(assessment_attempt.get("report").first().get("is_error")) { %>
-			<div id="report_editor" class="editor"> <%= assessment_attempt.get("report").first().get("html_report") %></div>
+			<div id="report_editor" class="editor"><%= assessment_attempt.get("report").first().get("html_report") %></div>
 			<script type="text/javascript" charset="utf-8">
 			var report_editor = ace.edit("report_editor");
 			report_editor.setTheme("ace/theme/monokai");

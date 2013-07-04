@@ -1,5 +1,9 @@
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
+	DevFiltr.guest = <%= current_or_guest_user.guest %>;
+	<% unless current_or_guest_user.guest %>
+		DevFiltr.current_user_id = <%= current_user.id %>;
+	<% end %>
 	$(".alert").alert();
   DevFiltr.initialize();
 });

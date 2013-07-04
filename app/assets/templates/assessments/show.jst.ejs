@@ -1,8 +1,10 @@
 <h1><%= assessment.escape("title") %></h1>
 Language: <%= assessment.escape("language") %> <br />
-Difficulty (1-5): <%= assessment.escape("difficulty") %> <br />
-Instructions: <%= assessment.escape("instructions") %>
-
+Difficulty (1-5): <%= assessment.escape("difficulty") %><br />
+Instructions: <%= assessment.escape("instructions") %><br/>
+<!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Invite to Assessment</a>
+<br/><br />
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#specs" data-toggle="tab">Specs</a></li>
 	<li><a href="#skeleton" data-toggle="tab">Skeleton</a></li>
@@ -27,7 +29,9 @@ Instructions: <%= assessment.escape("instructions") %>
 				<th>Score</th>
 			</thead>
 			<tbody>
-				<% assessment.get("assessment_attempts").each(function(attempt) { %>
+				<% if(assessment.get("assessment_attempts").length > 0) {%>
+					<% console.log("more than one assessment attempt")%>
+				<%  assessment.get("assessment_attempts").each(function(attempt) { %>
 				<tr>
 					<td>
 						<a href="#assessment_attempts/<%= attempt.get("id") %>">
@@ -39,24 +43,50 @@ Instructions: <%= assessment.escape("instructions") %>
 					</td>
 					<td>
 						<% console.log(attempt) %>
-						<%= attempt %>
+						<%= attempt.get("report").example_count %>
 					</td>
 					<td>
+						<%= attempt.get("report").failure_count %>
 					</td>
 					<td>
+						<%= attempt.get("report").pending_count %>
 					</td>
 					<td>
-					</td>
-					<td>
+						<%= attempt.get("report").example_count - attempt.get("report").failure_count %>
+						/<%= attempt.get("report").example_count %>
 					</td>
 				</tr>
 				<% })%>
+				<% } %>
 			</tbody>
 		</table>
 	</div>
 </div>
 
-
-<a href="#">Assessments</a>
 <a href="#<%= assessment.url() + '/take' %>" class="btn">Take</a>
 <a href="#<%= assessment.url() + '/edit' %>" class="btn">Edit</a>
+
+
+
+
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Invite Hackers!</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+    	<form>
+				<label for="email">Email</label><input type="text" name="email" value="" id="email">
+			</form>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Send!</button>
+  </div>
+</div>

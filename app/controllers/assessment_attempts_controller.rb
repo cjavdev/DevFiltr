@@ -1,4 +1,6 @@
 class AssessmentAttemptsController < ApplicationController
+  before_filter :authenticate_user!, :only => [:update]
+  
   def index
     @assessment_attempts = AssessmentAttempt.all
     render :json => @assessment_attempts
@@ -14,9 +16,11 @@ class AssessmentAttemptsController < ApplicationController
     @assessment_attempt = @assessment.assessment_attempts.build
   end
   
-  def create
+  def create    
+    params[:assessment_attempt][:candidate_id] = current_student_id 
     
-    @assessment_attempt = current_user.assessment_attempts.new(params[:assessment_attempt])
+    @assessment_attempt = AssessmentAttempt.new(params[:assessment_attempt])
+    
     if @assessment_attempt.save
       render :json => @assessment_attempt
     else

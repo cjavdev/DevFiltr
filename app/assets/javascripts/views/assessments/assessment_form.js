@@ -25,7 +25,7 @@ DevFiltr.Views.AssessmentForm = Backbone.View.extend({
 		var attrs = $(event.target).serializeJSON();
 		attrs.assessment.skeleton = skeleton_editor.getValue();
 		attrs.assessment.specs = spec_editor.getValue();
-		console.log(attrs);
+		
 		DevFiltr.assessments.create(attrs, { 
 		error: function (assessment, resp, xhr) {
 			that.$el.prepend(resp.responseText);
@@ -33,5 +33,6 @@ DevFiltr.Views.AssessmentForm = Backbone.View.extend({
 		success: function (assessment, resp, xhr) {
 			Backbone.history.navigate("assessments/" + assessment.id, true);
 		}});
+			
 	},
 });

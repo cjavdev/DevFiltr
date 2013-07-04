@@ -6,33 +6,28 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :password, :token, :username
-  # attr_reader :password
-  # 
-  # validates :username, :password_digest, :presence => true
-  # validates :password, :length => { :minimum => 3 }
   
   has_many :assessments, foreign_key: :administrator_id
   has_many :assessment_attempts, foreign_key: :candidate_id
-  # 
-  # def password
-  #   @password ||= self.password_digest
-  # end
-  # 
-  # def password=(pass)
-  #   self.password_digest = BCrypt::Password.create(pass)
-  # end
-  # 
-  # def validate_password(pass)
-  #   BCrypt::Password.new(self.password_digest) == pass
-  # end
-  # 
-  # def reset_token
-  #   self.token = SecureRandom.urlsafe_base64(16)
-  #   self.save!
-  #   self.token
-  # end
+  
+  after_create :seed
+  
+  def seed
+    calculator = Assessment.new(
+      :title            => "Calculator", 
+      :difficulty       => 1, 
+      :administrator_id => self.id, 
+      :instructions     => "Build a calculator that adds, subtracts, multiplies, and divides.", 
+      :language         => "ruby", 
+      :specs            => "describe Calculator do \nit 'adds' do\n add(1,2).should == 3 \nend \nend", 
+      :time_limit       => 10, 
+      :skeleton         => "class Calculator\n  def add(x,y)\n    x + y\n  end\n   end" )
+    calculator.assessment_attempts.new(
+      :title     => "Calculator Attempt 1",
+      :solution  => "class Calculator \ndef add(x,y) \nx + y \nend \nend",
+      :candidate_id => User.find_by_email("sample_student@devfiltr.io").id )
+    calculator.assessment_attempts.first.grade  
+    calculator.save!  
+  end
 end

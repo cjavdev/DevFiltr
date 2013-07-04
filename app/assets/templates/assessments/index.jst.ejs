@@ -2,9 +2,16 @@
 <ul>
 <% assessments.each(function(assessment) { %>
 	<li>
-		<a href="#assessments/<%= assessment.escape("id") %>"><%= assessment.escape("title") %></a>
+		<a href="#assessments/<%= assessment.escape("id") %>">
+			<%= assessment.escape("title") %>
+		</a>
 	</li>
 <% }); %>
 </ul>
-
+<% if(DevFiltr.current_user_id) { %>
 <a href="#assessments/new" class="btn">New Assessment</a>
+<% } %>
+<% console.log(assessments) %>
+<% if(assessments.length == 0) { %>
+	<a href="#assessments/demo" class="btn">Demo</a>
+<% } %>

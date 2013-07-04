@@ -1,11 +1,9 @@
 DevFiltr.Views.ReportsIndex = Backbone.View.extend({
 
-  template: JST['reports/index'], 
+  template: JST['report/index'], 
 	
 	render: function () {
-		var renderedContent = this.template({
-			report: this.model
-		});
+		var renderedContent = this.template();
 		
 		this.$el.html(renderedContent);
 		return this;

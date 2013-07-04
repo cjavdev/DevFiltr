@@ -1,18 +1,20 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-
-  # def require_login
-  #   unless logged_in?
-  #     redirect_to new_session_url
-  #   end
-  # end
-  # 
-  # def current_user
-  #   return nil unless session[:token]
-  #   @current_user ||= User.find_by_token(session[:token])
-  # end
-  # 
-  # def logged_in?
-  #   !!current_user
-  # end
+  helper_method :current_studen_id, :current_admin_id
+  
+  def current_student_id
+    if current_or_guest_user.guest
+      User.find_by_email("sample_student@devfiltr.io").id
+    else
+      current_user.id
+    end
+  end
+  
+  def current_admin_id
+    if current_or_guest_user.guest
+      User.find_by_email("sample_admin@devfiltr.io").id
+    else
+      current_user.id
+    end
+  end
 end

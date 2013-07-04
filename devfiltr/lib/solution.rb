@@ -1,3 +1,5 @@
-def test_spec(x)
-  3
-end
+class Calculator
+  def xadd(x,y)
+    x + y
+  end
+ end

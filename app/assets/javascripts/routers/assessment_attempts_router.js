@@ -8,8 +8,8 @@ DevFiltr.Routers.AssessmentAttempts = Backbone.Router.extend({
 	
 	routes: {
 		"assessment_attempts/:id" : "show",
-		"assessment_attempts" : "index",		
-		"assessments/:id/take" : "new",
+		"assessment_attempts"     : "index",		
+		"assessments/:id/take"    : "new",
 	},
 	
 	new: function (id) {

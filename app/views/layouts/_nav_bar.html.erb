@@ -3,15 +3,20 @@
     <div class="container">  
 			<ul class="nav">
 				<li><a class="brand" href="#">DevFiltr</a></li>
-				<li><a href="#assessments">Assessments</a></li>
-				<li><a href="#languages">Languages</a></li>
-				<li><a href="#pricing">Prices</a></li>
-		  <% if user_signed_in? %>
+				<li><a href="/#assessments">Assessments</a></li>
+				<li><a href="/languages">Languages</a></li>
+				<li><a href="/prices">Prices</a></li>
+		  	<% if user_signed_in? %>
 		    <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
-		  <% else %>
+		  	<% else %>
 		    <li><%= link_to "Sign Up", new_user_registration_path %></li>
 				<li><%= link_to "Sign In", new_user_session_path %></li>
-		  <% end %>
+		  	<% end %>
+				<% if current_or_guest_user.guest %>
+				<li><%= link_to "Guest", new_user_registration_path %></li>
+				<% else %>
+				<li><a href="#"><%= current_user.email %></a></li>
+				<% end %>
 			</ul>
     </div>  
   </div>  

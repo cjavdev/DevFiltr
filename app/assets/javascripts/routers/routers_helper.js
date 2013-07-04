@@ -12,6 +12,16 @@ Backbone.Router.prototype._getAssessment = function(id, callback) {
 	return assessment;
 };
 
+Backbone.Router.prototype._getClientAssessment = function(id, callback) {
+	var assessment = DevFiltr.assessments.get(id);
+	if(!assessment) {
+		Backbone.history.navigate("", true);
+	} else {
+		callback(assessment);
+	}
+	return assessment;
+};
+
 Backbone.Router.prototype._getAssessmentAttempt = function (id, callback) {
 	var attempt = DevFiltr.assessment_attempts.get(id);
 	if(!attempt) {

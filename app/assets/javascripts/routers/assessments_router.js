@@ -1,9 +1,11 @@
 DevFiltr.Routers.Assessments = Backbone.Router.extend({
 	initialize: function (options) {
 		this.$rootEl = options.$rootEl;
-		
+
 		DevFiltr.assessments = new DevFiltr.Collections.Assessments();
-		DevFiltr.assessments.fetch();
+		if(!DevFiltr.guest) {
+			DevFiltr.assessments.fetch();
+		}
 	},
 	
 	routes: {
@@ -11,6 +13,7 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 		"assessments"          : "index",
 		"session/new"          : "login",
 		"assessments/new"      : "new",
+		"assessments/demo"     : "demo",
 		"assessments/:id/edit" : "edit",
 		"assessments/:id"      : "show",
 	},
@@ -19,7 +22,7 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 		var indexView = new DevFiltr.Views.AssessmentsIndex({
 			collection: DevFiltr.assessments
 		});
-		
+	
 		this._swapView(indexView);
 	},
 	
@@ -34,12 +37,25 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 		});
 	},
 	
+	demo: function () {
+		var that = this;
+		DevFiltr.Collections.Assessments.fetchDemo(function(assessments) {
+			var indexView = new DevFiltr.Views.AssessmentsIndex({
+				collection: assessments
+			});
+			
+			that._swapView(indexView);
+		});
+	},
+	
 	new: function (id) {
+		
 		var assessment = new DevFiltr.Models.Assessment();
 		var formView = new DevFiltr.Views.AssessmentForm({
 			model: assessment
 		});
 		this._swapView(formView);
+	
 	},
 	
 	login: function () {
