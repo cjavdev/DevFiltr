@@ -10,6 +10,7 @@ class Assessment < ActiveRecord::Base
   validates :instructions, :language, :specs, :title, presence: true
   
   has_many :assessment_attempts, :inverse_of => :assessment
+  has_many :assessment_invites
   belongs_to :administrator, class_name: "User", foreign_key: :administrator_id
   
   accepts_nested_attributes_for :assessment_attempts

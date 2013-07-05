@@ -1,3 +1,3 @@
-DevFiltr.Models.Report = Backbone.Model.extend({
-	jsonRoot: "report"
+DevFiltr.Models.Report = Backbone.RelationalModel.extend({
+	// jsonRoot: "report"
 });

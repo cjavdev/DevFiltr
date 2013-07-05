@@ -8,6 +8,7 @@
 
 sample_u = User.find_by_email("sample_student@devfiltr.io")
 unless sample_u
+  puts "Creating sample student"
   sample_u = User.create!({
     :email => "sample_student@devfiltr.io",
     :password => "p@ssword", 
@@ -17,6 +18,7 @@ end
 
 sample_t = User.find_by_email("sample_admin@devfiltr.io")
 unless sample_t
+  puts "Creating sample admin"
   sample_t = User.create!({
     :email => "sample_admin@devfiltr.io",
     :password => "p@ssword", 

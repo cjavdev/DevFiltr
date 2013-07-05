@@ -14,18 +14,51 @@ class User < ActiveRecord::Base
   after_create :seed
   
   def seed
+    spec_code = <<-CODE
+    describe Calculator do
+      it 'adds' do
+        c = Calculator.new
+        c.add(1, 2).should == 3
+      end
+      
+      it 'subtracts' do
+        c = Calculator.new
+        c.subtract(2,1).should == 1
+      end
+    end
+    CODE
+    
+    sol_code = <<-CODE
+    class Calculator
+      def add(x, y)
+        x + y
+      end
+    end
+    CODE
+    
+    skeleton_code = <<-CODE
+    class Calculator
+      def add(x, y)
+        
+      end
+      
+      def subtract(x, y)
+        
+      end
+    end
+    CODE
     calculator = Assessment.new(
       :title            => "Calculator", 
       :difficulty       => 1, 
       :administrator_id => self.id, 
       :instructions     => "Build a calculator that adds, subtracts, multiplies, and divides.", 
       :language         => "ruby", 
-      :specs            => "describe Calculator do \nit 'adds' do\n add(1,2).should == 3 \nend \nend", 
+      :specs            => spec_code, 
       :time_limit       => 10, 
-      :skeleton         => "class Calculator\n  def add(x,y)\n    x + y\n  end\n   end" )
+      :skeleton         => skeleton_code )
     calculator.assessment_attempts.new(
       :title     => "Calculator Attempt 1",
-      :solution  => "class Calculator \ndef add(x,y) \nx + y \nend \nend",
+      :solution  => sol_code,
       :candidate_id => User.find_by_email("sample_student@devfiltr.io").id )
     calculator.assessment_attempts.first.grade  
     calculator.save!  

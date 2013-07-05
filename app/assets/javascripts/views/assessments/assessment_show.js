@@ -6,12 +6,17 @@ DevFiltr.Views.AssessmentShow = Backbone.View.extend({
 	template: JST['assessments/show'],
 	
 	render: function () {
-		console.log("rendering");
 		var renderedContent = this.template({
 			assessment: this.model
 		});
 		
 		this.$el.html(renderedContent);
+		
+		var inviteView = new DevFiltr.Views.AssessmentInviteForm({
+			assessment_id: this.model.id
+		});
+		
+		this.$el.find("#modal-invite").append(inviteView.render().$el);
 		return this;
 	}
 });

@@ -2,15 +2,14 @@
 Language: <%= assessment.escape("language") %> <br />
 Difficulty (1-5): <%= assessment.escape("difficulty") %><br />
 Instructions: <%= assessment.escape("instructions") %><br/>
-<!-- Button to trigger modal -->
-<a href="#myModal" role="button" class="btn" data-toggle="modal">Invite to Assessment</a>
+<div id="modal-invite"></div>
 <br/><br />
-<ul class="nav nav-tabs">
+<ul id="tabs" class="nav nav-tabs">
 	<li class="active"><a href="#specs" data-toggle="tab">Specs</a></li>
 	<li><a href="#skeleton" data-toggle="tab">Skeleton</a></li>
 	<li><a href="#attempts" data-toggle="tab">Attempts</a></li>
 </ul>
-<div class="tab-content">
+<div id="contents" class="tab-content">
   <div class="tab-pane active" id="specs">
 		<pre><%= assessment.escape("specs") %></pre>
 	</div>
@@ -39,7 +38,7 @@ Instructions: <%= assessment.escape("instructions") %><br/>
 						</a>
 					</td>
 					<td>
-						<%= attempt.get("candidate_id") %>
+						<%= attempt.get("candidate_name") %>
 					</td>
 					<td>
 						<% console.log(attempt) %>
@@ -65,28 +64,3 @@ Instructions: <%= assessment.escape("instructions") %><br/>
 
 <a href="#<%= assessment.url() + '/take' %>" class="btn">Take</a>
 <a href="#<%= assessment.url() + '/edit' %>" class="btn">Edit</a>
-
-
-
-
-
-
-
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Invite Hackers!</h3>
-  </div>
-  <div class="modal-body">
-    <p>
-    	<form>
-				<label for="email">Email</label><input type="text" name="email" value="" id="email">
-			</form>
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Send!</button>
-  </div>
-</div>

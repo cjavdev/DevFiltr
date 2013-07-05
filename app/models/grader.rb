@@ -130,7 +130,6 @@ class GraderHtmlFormatter < RSpec::Core::Formatters::HtmlFormatter
 	  var editor_#{@@editor_count} = ace.edit('editor_#{@@editor_count}'); editor_#{@@editor_count}.setTheme('ace/theme/monokai');editor_#{@@editor_count}.getSession().setMode('ace/mode/ruby');</script>"
   end
 end
-
 class GraderHtmlPrinter < RSpec::Core::Formatters::HtmlPrinter
   def initialize(output)
     super(output)
@@ -187,7 +186,6 @@ class GraderHtmlPrinter < RSpec::Core::Formatters::HtmlPrinter
   end
   
 end
-
 class GraderSnippetExtractor < RSpec::Core::Formatters::SnippetExtractor
   def post_process(highlighted, offending_line)
     new_lines = []

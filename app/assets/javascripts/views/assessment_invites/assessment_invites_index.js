@@ -1,16 +1,17 @@
-DevFiltr.Views.AssessmentsIndex = Backbone.View.extend({
+DevFiltr.Views.AssessmentInvitesIndex = Backbone.View.extend({
 	initialize: function () {
 		this.listenTo(this.collection, "all", this.render);
 	},
 	
-  template: JST['assessments/index'],
+  template: JST['assessment_invites/index'],
 	
-	render: function () {		
+	render: function () {
 		var renderedContent = this.template({
-			assessments: this.collection
+			invites: this.collection
 		});
 		
 		this.$el.html(renderedContent);
 		return this;
 	},
+
 });

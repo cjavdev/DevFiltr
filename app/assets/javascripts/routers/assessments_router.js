@@ -3,8 +3,10 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 		this.$rootEl = options.$rootEl;
 
 		DevFiltr.assessments = new DevFiltr.Collections.Assessments();
+		DevFiltr.invites = new DevFiltr.Collections.AssessmentInvites();
 		if(!DevFiltr.guest) {
 			DevFiltr.assessments.fetch();
+			DevFiltr.invites.fetch();
 		}
 	},
 	
@@ -22,8 +24,13 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 		var indexView = new DevFiltr.Views.AssessmentsIndex({
 			collection: DevFiltr.assessments
 		});
-	
 		this._swapView(indexView);
+		
+		var invitesView = new DevFiltr.Views.AssessmentInvitesIndex({
+			collection: DevFiltr.invites
+		});
+		
+		this.$rootEl.append(invitesView.render().$el)
 	},
 	
 	show: function (id) {
@@ -40,6 +47,7 @@ DevFiltr.Routers.Assessments = Backbone.Router.extend({
 	demo: function () {
 		var that = this;
 		DevFiltr.Collections.Assessments.fetchDemo(function(assessments) {
+			DevFiltr.assessments = assessments;
 			var indexView = new DevFiltr.Views.AssessmentsIndex({
 				collection: assessments
 			});

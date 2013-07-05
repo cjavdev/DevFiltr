@@ -3,12 +3,12 @@ class AssessmentsController < ApplicationController
   
   def index
     @assessments = current_or_guest_user.assessments
-    render :json => @assessments
+    render :index
   end
 
   def show
     @assessment = Assessment.find(params[:id])
-    render :json => @assessment
+    render :show
   end
 
   def new
@@ -29,7 +29,7 @@ class AssessmentsController < ApplicationController
   end
   
   def update
-    params[:assessment][:administrator_id] = current_admin_id
+    params[:assessment][:administrator_id] = current_admin.id
     @assessment = Assessment.find(params[:id])
     @assessment.update_attributes(params[:assessment])
     if @assessment.save
@@ -43,8 +43,6 @@ class AssessmentsController < ApplicationController
     if current_or_guest_user.guest
       current_or_guest_user.username = "guest"
       current_or_guest_user.save
-      sign_in(:user, current_or_guest_user)
-      p current_or_guest_user
     end
     
     render :json => current_or_guest_user.assessments

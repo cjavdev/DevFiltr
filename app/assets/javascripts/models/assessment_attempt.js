@@ -1,15 +1,25 @@
-DevFiltr.Models.AssessmentAttempt = Backbone.Model.extend({
-	jsonRoot: "assessment_attempt",
+DevFiltr.Models.AssessmentAttempt = Backbone.RelationalModel.extend({
+	relations: [{
+		type					 : Backbone.HasOne,
+		key						 : 'report',
+		relatedModel	 : 'DevFiltr.Models.Report',
+		reverseRelation: {
+			key	: 'assessment_attempt',
+			type: Backbone.HasOne
+		}
+	}]
 	
-	parse: function (data) {
-		var report = new DevFiltr.Collections.Reports({
-				assessment_attempt: this
-		});
-		
-		report.set(data.report);
-		data.report = report;
-		return data;
-	},
+	// jsonRoot: "assessment_attempt",
+	// 
+	// parse: function (data) {
+	// 	var report = new DevFiltr.Collections.Reports({
+	// 			assessment_attempt: this
+	// 	});
+	// 	
+	// 	report.set(data.report);
+	// 	data.report = report;
+	// 	return data;
+	// },
 	
 	// toJSON: function() {
 // 		var json = Backbone.Model.prototype.toJSON.call(this);

@@ -1,8 +1,6 @@
 DevFiltr.Collections.Assessments = Backbone.Collection.extend({
-
   model: DevFiltr.Models.Assessment,
 	url: "/assessments"
-
 });
 
 DevFiltr.Collections.Assessments.fetchDemo = function (callback) {
