@@ -1,5 +1,5 @@
-class Calculator
-  def xadd(x,y)
-    x + y
+class Calculator 
+  def add(x, y)
+   x+y
   end
- end
+end
