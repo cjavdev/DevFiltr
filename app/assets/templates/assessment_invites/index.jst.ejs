@@ -1,0 +1,13 @@
+<% if(invites.length > 0) { %>
+<h1>Invites</h1>
+<ul>
+	<% invites.each(function(invite) { %>
+		<% console.log(invite.get("assessment")) %>
+		<li>
+			<a href="#/assessments/<%= invite.escape("assessment_id") %>/take">
+				<%= invite.get("assessment").escape("title") %>
+			</a>
+		</li>
+	<% }); %>
+</ul>
+<%}%>

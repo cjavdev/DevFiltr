@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  assessment_id: 1
+  email: MyString
+  taken: false
+
+two:
+  assessment_id: 1
+  email: MyString
+  taken: false

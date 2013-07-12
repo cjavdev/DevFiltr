@@ -3,7 +3,7 @@ class AssessmentAttemptsController < ApplicationController
   
   def index
     @assessment_attempts = AssessmentAttempt.all
-    render :json => @assessment_attempts
+    render :index
   end
 
   def show
@@ -18,7 +18,7 @@ class AssessmentAttemptsController < ApplicationController
   end
   
   def create    
-    params[:assessment_attempt][:candidate_id] = current_student_id 
+    params[:assessment_attempt][:candidate_id] = current_student.id 
     
     @assessment_attempt = AssessmentAttempt.new(params[:assessment_attempt])
     

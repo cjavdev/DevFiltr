@@ -3,14 +3,27 @@
 	<label for="title">Title</label>
 	<input type="text" name="assessment_attempt[title]" value="" id="title" />
 	<br />
-	<label for="solution">Solution</label>
-	<div id="solution_editor" class="editor"><%= assessment_attempt.get("solution") %></div>
-	<script type="text/javascript" charset="utf-8">
-	  var editor = ace.edit("solution_editor");
-	  editor.setTheme("ace/theme/monokai");
-	  editor.getSession().setMode("ace/mode/ruby");
-	</script>
+	<div class="row">
+		<span id="form" class="span6">
+			<label for="solution">Solution</label>
+			<div id="solution_editor" class="editor"><%= assessment_attempt.get("solution") %></div>
+			<script type="text/javascript" charset="utf-8">
+			var editor = ace.edit("solution_editor");
+			editor.setTheme("ace/theme/monokai");
+			editor.getSession().setMode("ace/mode/ruby");
+			</script>
+		</span>
+		<span id="show" class="span6">
+			<label>Specs</label>
+			<div id="specs_editor" class="editor"><%= assessment_attempt.get("assessment").get("specs") %></div>
+			<script type="text/javascript" charset="utf-8">
+			var editor = ace.edit("specs_editor");
+			editor.setTheme("ace/theme/monokai");
+			editor.getSession().setMode("ace/mode/ruby");
+			</script>
+		</span>
+	</div>
 	<br />
-	
 	<p><input type="submit" value="Run Tests" class="btn btn-primary"></p>
 </form>
+	

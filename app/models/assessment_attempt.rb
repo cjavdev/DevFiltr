@@ -4,13 +4,9 @@ class AssessmentAttempt < ActiveRecord::Base
   validates :title, presence: true
   
   belongs_to :candidate, class_name: "User", foreign_key: :candidate_id
-  belongs_to :assessment, :inverse_of => :assessment_attempts
+  belongs_to :assessment, :inverse_of => :assessment_attempts, :dependent => :destroy
   
   has_one :report, :class_name => "Report", :foreign_key => :assessment_attempt_id
-  
-  def as_json(options = {})
-    super(options.merge({ :include => :report }))
-  end
   
   after_commit :grade
   
