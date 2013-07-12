@@ -1,12 +1,117 @@
-<form action="<%= new_assessment_attempt_url(@assessment) %>" method="post">
-	<label for="title">title</label>
-	<input type="text" name="assessment_attempt[title]" value="" id="title" />
-	<br />
-	<label for="solution">solution</label>
-	<textarea name="assessment_attempt[solution]" id="solution"></textarea>
-	<br />
+  <script type="text/ruby">
+    def j(selector)
+      MrubyJs.window.jQuery(selector)
+    end
+
+    def w
+      MrubyJs.window
+    end
+  </script>
+	<style type="text/css" media="screen">
+	.pane {
+		width: 49%;
+		height: 100%;
+		float:left;
+	}
 	
+	#main {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+	</style>
+	<div id="main">
+		<div id="left-pane" class="pane">
+			<ul class="nav nav-tabs sortable-tabs" id="lmyTab">
+			  <li class="active"><a href="#solution">Solution</a></li>
+			</ul>
+ 
+			<div class="tab-content">
+			  <div class="tab-pane active" id="solution">
+					<div id="solution_editor" class="ace_editor full_height"><%= @assessment.skeleton %></div>
+					<script type="text/javascript" charset="utf-8">
+					  var solution_editor = ace.edit("solution_editor");
+					  solution_editor.setTheme("ace/theme/monokai");
+					  solution_editor.getSession().setMode("ace/mode/ruby");
+					</script>
+				</div>
+			</div>
+
+			<div class="footer-pane">
+				<button class="btn btn-large btn-primary">Submit</button>
+			</div>
+		</div>
+		<div id="right-pane" class="pane">
+			<ul class="nav nav-tabs sortable-tabs" id="myTab">
+			  <li class="active"><a href="#irb">REPL</a></li>
+			  <li><a href="#report">Report</a></li>
+			  <li><a href="#specs">Specs</a></li>
+			  <li><a href="#instructions">Instructions</a></li>
+			</ul>
+ 
+			<div class="tab-content">
+			  <div class="tab-pane active" id="irb">
+				  <div id="shell">
+				    <div id="output">
+				    </div>
+				    <div id="command">
+				      <span class="prompt">&gt;&gt;</span>
+				      <div id="editor"></div>
+				    </div>
+				  </div>
+			  </div>
+			  <div class="tab-pane" id="report">report</div>
+			  <div class="tab-pane" id="specs">
+					<div id="specs_editor" class="ace_editor full_height"><%= @assessment.specs %></div>
+					<script type="text/javascript" charset="utf-8">
+				  var specs_editor = ace.edit("specs_editor");
+				  specs_editor.setTheme("ace/theme/monokai");
+				  specs_editor.getSession().setMode("ace/mode/ruby");
+					specs_editor.setReadOnly(true);
+					</script>
+				</div>
+			  <div class="tab-pane" id="instructions">
+					<%= @assessment.instructions %>
+				</div>
+			</div>
+		</div>
+	</div>
 	
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" id="authenticity_token">
-	<p><input type="submit" value="Continue &rarr;"></p>
-</form>
+	<script type="text/javascript">
+	  $(function () {
+			$("#lmyTab, #myTab" ).sortable({
+      	connectWith: ".sortable-tabs"
+    	}).disableSelection();
+		  $( "#lmyTab, #myTab" ).on( "sortupdate", function( event, ui ) {
+				var $sourceDiv = $(ui.item.find("a").attr("href"));
+				
+				if(ui.sender) {
+					if(ui.sender.attr("id") == "lmyTab") {
+						//put in rmyTabs panes
+						$('#right-pane .tab-content .tab-pane, #right-pane li').removeClass("active");
+						$("#right-pane .tab-content").append($sourceDiv);
+						$("#left-pane .tab-content .tab-pane:first, #left-pane li:first").addClass("active");
+					} else {
+						//put in lmyTabs panes
+						$('#left-pane .tab-content .tab-pane, #left-pane li').removeClass("active");
+						$("#left-pane .tab-content").append($sourceDiv);
+						$("#right-pane .tab-content .tab-pane:first, #right-pane li:first").addClass("active");
+					}
+
+					$sourceDiv.addClass("active");
+					ui.item.addClass("active");
+				}
+		  });
+
+			$('#myTab a').click(function (e) {
+			  e.preventDefault();
+			  $(this).tab('show');
+			});
+			$('#lmyTab a').click(function (e) {
+			  e.preventDefault();
+			  $(this).tab('show');
+			});
+	  });
+	</script>

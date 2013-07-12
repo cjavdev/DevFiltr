@@ -1,0 +1,11 @@
+//= require jquery
+//= require jquery_ujs
+//= require jquery.ui.all
+//= require underscore
+//= require backbone
+//= require backbone.sync
+//= require rspec_report
+//= require bootstrap
+//= require dev_filtr
+//= require events
+//= require webruby

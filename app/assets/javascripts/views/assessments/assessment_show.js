@@ -6,7 +6,6 @@ DevFiltr.Views.AssessmentShow = Backbone.View.extend({
 	template: JST['assessments/show'],
 	
 	render: function () {
-		console.log("rendering");
 		var renderedContent = this.template({
 			assessment: this.model
 		});

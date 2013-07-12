@@ -5,7 +5,7 @@ gem 'pg'
 # gem "sass", :require => 'sass'
 
 group :development do
-  gem 'better_errors'
+  gem 'better_errors', :path => "/Users/w1zeman1p/Downloads/better_errors"
   gem 'binding_of_caller'
 end
 
@@ -21,6 +21,7 @@ gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'ace-rails-ap'
 gem 'bcrypt-ruby'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'backbone-on-rails'
 gem 'rspec'
 # gem 'grader'

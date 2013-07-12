@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <%= stylesheet_link_tag    "sol_editor", :media => "all" %>
+  <%= javascript_include_tag "sol_editor" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<%= yield %>
+</body>
+</html>

@@ -14,6 +14,7 @@ class AssessmentAttemptsController < ApplicationController
   def new
     @assessment = Assessment.find(params[:id])
     @assessment_attempt = @assessment.assessment_attempts.build
+    render :new, :layout => "editor"
   end
   
   def create    

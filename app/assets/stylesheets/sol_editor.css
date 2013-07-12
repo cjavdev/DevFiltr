@@ -9,10 +9,16 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= jquery.ui.all
- *= require report
- *= require root
  *= require bootstrap
+ *= require screen
+ *= jquery.ui.all
  */
 
-@import "bootstrap";
+@import 'bootstrap';
+.ace_editor {
+  position: relative;
+  height: 650px;
+	width: 98%;
+}
+
+
